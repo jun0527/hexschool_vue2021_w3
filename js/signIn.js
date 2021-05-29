@@ -54,7 +54,7 @@ const app = {
             this.expired = new Date(res.data.expired);
             document.cookie = `signInCookie=${this.token}; expires=${this.expired}`;
             alert("登入成功！");
-            window.location = "index.html";
+            window.location = "products.html";
           } else {
             alert("登入失敗，請確認帳號密碼是否正確！");
             this.user.password = "";
