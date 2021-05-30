@@ -71,10 +71,10 @@ const app = {
         unit: "",
         is_enabled: ""
       },
-      modalStatus: "",
+      showStatus: "",
       btnHidden: {
-        addBtn: "false",
-        editBtn: "false"
+        addData: true,
+        editData: false
       },
       editId: ""
     }
@@ -97,13 +97,13 @@ const app = {
     showAddProduct(status, id, index) {
       this.modalStatus = status;
       if (status === "editData") {
-        this.btnHidden.addBtn = true;
-        this.btnHidden.editBtn = false;
+        this.showStatus.addData = false;
+        this.showStatus.editData = false;
         this.editId = id;
         this.tempData = { ...this.products[index] };
       } else {
-        this.btnHidden.addBtn = false;
-        this.btnHidden.editBtn = true;
+        this.showStatus.editData = false;
+        this.showStatus.addData = true;
       }
       myModal.show();
     },

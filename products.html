@@ -60,7 +60,7 @@
                   <input type="text" id="unit" name="unit" placeholder="請輸入單位(如：個)" v-model="tempData.unit">
                 </div>
               </div>
-              <div class="formGroup" :hidden="btnHidden.addBtn">
+              <div class="formGroup" v-if="showStatus.addData">
                 <input type="checkbox" id="is_enabled" name="is_enabled" value="1" v-model="tempData.is_enabled">
                 <label for="is_enabled">是否啟用</label>
               </div>
@@ -74,9 +74,9 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="closeAddProduct">取消</button>
-            <button type="button" class="btn btn-primary" @click="addDataValidate('addData')"
-              :hidden="btnHidden.addBtn">建立</button>
-            <button type="button" class="btn btn-primary" :hidden="btnHidden.editBtn"
+            <button type="button" class="btn btn-primary" v-if="showStatus.addData"
+              @click="addDataValidate('addData')">建立</button>
+            <button type="button" class="btn btn-primary" v-if="showStatus.addData"
               @click="addDataValidate('editData',editId)">編輯</button>
           </div>
         </div>
