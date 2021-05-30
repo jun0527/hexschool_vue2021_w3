@@ -1,3 +1,4 @@
+let myModal = {};
 const app = {
   data() {
     return {
@@ -229,10 +230,8 @@ const app = {
         })
     },
   },
-  created() {
-    this.init();
-  },
   mounted() {
+    this.init();
     const modal = document.querySelector(".productModal");
     myModal = new bootstrap.Modal(modal);
   }
