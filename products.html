@@ -76,7 +76,7 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="closeAddProduct">取消</button>
             <button type="button" class="btn btn-primary" v-if="showStatus.addData"
               @click="addDataValidate('addData')">建立</button>
-            <button type="button" class="btn btn-primary" v-if="showStatus.addData"
+            <button type="button" class="btn btn-primary" v-else="showStatus.addData"
               @click="addDataValidate('editData',editId)">編輯</button>
           </div>
         </div>

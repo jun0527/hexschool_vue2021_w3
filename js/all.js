@@ -71,8 +71,7 @@ const app = {
         unit: "",
         is_enabled: ""
       },
-      showStatus: "",
-      btnHidden: {
+      showStatus: {
         addData: true,
         editData: false
       },
@@ -98,7 +97,7 @@ const app = {
       this.modalStatus = status;
       if (status === "editData") {
         this.showStatus.addData = false;
-        this.showStatus.editData = false;
+        this.showStatus.editData = true;
         this.editId = id;
         this.tempData = { ...this.products[index] };
       } else {
