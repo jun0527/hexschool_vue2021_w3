@@ -11,7 +11,7 @@
 
 <body>
   <div class="wrap" id="app">
-    <form class="signIn js-signIn">
+    <form class="signIn js-signIn" @submit.prevent="validate">
       <h1>管理員登入</h1>
       <div class="formGroup">
         <label for="email">帳號<span v-text="prompt.email"></span></span></label>
@@ -22,7 +22,7 @@
         <input type="password" id="password" name="password" v-model.trim="user.password" placeholder="請輸入密碼">
       </div>
       <div class="formGroup">
-        <button type="button" class="btn" @click="validate">登入</button>
+        <button type="submitS" class="btn">登入</button>
       </div>
 
     </form>

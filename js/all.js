@@ -1,4 +1,4 @@
-let myModal = {};
+let productModal = {};
 const app = {
   data() {
     return {
@@ -75,13 +75,14 @@ const app = {
         addData: true,
         editData: false
       },
-      editId: ""
+      id: {
+        editId: "",
+        deleteId: ""
+      }
     }
   },
   methods: {
     init() {
-      let token = document.cookie.replace(/(?:(?:^|.*;\s*)signInCookie\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-      axios.defaults.headers.common['Authorization'] = token;
       axios.get(`${this.url}api/${this.path}/admin/products`)
         .then((res) => {
           if (res.data.success) {
@@ -93,22 +94,34 @@ const app = {
         })
     },
     //互動視窗
-    showAddProduct(status, id, index) {
+    showAddProduct(modal, status, id, index) {
+      console.log(modal);
       this.modalStatus = status;
       if (status === "editData") {
         this.showStatus.addData = false;
         this.showStatus.editData = true;
-        this.editId = id;
+        this.id.editId = id;
         this.tempData = { ...this.products[index] };
-      } else {
+      } else if (status === "editData") {
         this.showStatus.editData = false;
         this.showStatus.addData = true;
+      } else {
+        this.id.deleteId = id;
       }
-      myModal.show();
+      if (modal === "productModal") {
+        productModal.show();
+      } else {
+        deleteModal.show();
+      }
     },
-    closeAddProduct() {
-      this.clearArrayData("tempData");
-      myModal.hide();
+    closeAddProduct(modal) {
+      if (modal === "productModal") {
+        this.clearArrayData("tempData");
+        productModal.hide();
+      } else {
+        deleteModal.hide();
+      }
+
     },
     addDataValidate(status, id) {
       const addProductFrom = document.querySelector(".addProduct");
@@ -147,7 +160,7 @@ const app = {
         .then((res) => {
           if (res.data.success) {
             alert("商品建立成功！");
-            this.closeAddProduct();
+            this.closeAddProduct('productModal');
             this.init();
           } else {
             console.log(res.data);
@@ -168,7 +181,7 @@ const app = {
         .then((res) => {
           if (res.data.success) {
             alert("修改商品資料成功！");
-            this.closeAddProduct();
+            this.closeAddProduct('productModal');
             this.init();
           } else {
             alert("修改商品資料失敗！");
@@ -219,6 +232,7 @@ const app = {
         .then((res) => {
           if (res.data.success) {
             alert("產品刪除成功！");
+            this.closeAddProduct('deleteModal');
             this.init();
           } else {
             alert("產品刪除失敗！");
@@ -230,9 +244,13 @@ const app = {
     },
   },
   mounted() {
+    let token = document.cookie.replace(/(?:(?:^|.*;\s*)signInCookie\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    axios.defaults.headers.common['Authorization'] = token;
     this.init();
-    const modal = document.querySelector(".productModal");
-    myModal = new bootstrap.Modal(modal);
+    const productModalArea = document.querySelector(".productModal");
+    const deleteModalArea = document.querySelector(".deleteModal");
+    productModal = new bootstrap.Modal(productModalArea);
+    deleteModal = new bootstrap.Modal(deleteModalArea);
   }
 }
 Vue.createApp(app).mount("#app");
