@@ -12,13 +12,13 @@
 <body>
   <div class="wrap" id="app">
     <h1 class="titleL">商品管理</h1>
-    <button type="button" class="showAddProductBtn" @click="showAddProduct('productModal','addData')">建立新商品</button>
+    <button type="button" class="showAddProductBtn" @click="showModal('productModal','addData')">建立新商品</button>
     <div class="modal productModal" tabindex="-1">
       <div class="modal-dialog addProductArea">
         <div class="modal-content">
           <div class="modal-header bg-dark text-white">
             <h5 class="modal-title">商品建立</h5>
-            <button type="button" class="btn-close btn-close-white" @click="closeAddProduct('productModal')"></button>
+            <button type="button" class="btn-close btn-close-white" @click="closeModal('productModal')"></button>
           </div>
           <div class="modal-body d-flex">
             <form action="index.html" class="addProduct js-addProduct">
@@ -74,7 +74,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-              @click="closeAddProduct('productModal')">取消</button>
+              @click="closeModal('productModal')">取消</button>
             <button type="button" class="btn btn-primary" v-if="showStatus.addData"
               @click="addDataValidate('addData')">建立</button>
             <button type="button" class="btn btn-primary" v-else="showStatus.addData"
@@ -109,8 +109,8 @@
             <span class="isEnabled">{{products[index].is_enabled===1?"啟用":"未啟用"}}</span>
           </td>
           <td><button type="button" class="editBtn"
-              @click="showAddProduct('productModal','editData',item.id,index)">編輯</button><button type="button"
-              class="deleteBtn" @click="showAddProduct('deleteModal','deleteData',item.id)">刪除</button></td>
+              @click="showModal('productModal','editData',item.id,index)">編輯</button><button type="button"
+              class="deleteBtn" @click="showModal('deleteModal','deleteData',item.id)">刪除</button></td>
         </tr>
       </tbody>
     </table>
@@ -119,14 +119,13 @@
         <div class="modal-content">
           <div class="modal-header bg-dark text-white">
             <h5 class="modal-title" id="exampleModalLabel">刪除確認</h5>
-            <button type="button" class="btn-close btn-close-white" @click="closeAddProduct('deleteModal')"></button>
+            <button type="button" class="btn-close btn-close-white" @click="closeModal('deleteModal')"></button>
           </div>
           <div class="modal-body">
             <p class="my-2">商品刪除後將無法復原，確定要刪除商品？</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-              @click="closeAddProduct('deleteModal')">取消</button>
+            <button type="button" class="btn btn-secondary" @click="closeModal('deleteModal')">取消</button>
             <button type="button" class="btn btn-danger" @click="deleteProduct(id.deleteId)">刪除</button>
           </div>
         </div>

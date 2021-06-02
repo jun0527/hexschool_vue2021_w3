@@ -94,7 +94,7 @@ const app = {
         })
     },
     //互動視窗
-    showAddProduct(modal, status, id, index) {
+    showModal(modal, status, id, index) {
       console.log(modal);
       this.modalStatus = status;
       if (status === "editData") {
@@ -114,7 +114,7 @@ const app = {
         deleteModal.show();
       }
     },
-    closeAddProduct(modal) {
+    closeModal(modal) {
       if (modal === "productModal") {
         this.clearArrayData("tempData");
         productModal.hide();
