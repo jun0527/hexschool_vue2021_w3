@@ -1,4 +1,5 @@
 let productModal = {};
+let deleteModal = {};
 const app = {
   data() {
     return {
